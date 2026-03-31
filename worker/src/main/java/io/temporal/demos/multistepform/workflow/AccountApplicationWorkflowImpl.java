@@ -118,12 +118,14 @@ public class AccountApplicationWorkflowImpl implements AccountApplicationWorkflo
         // Ensure KYC is resolved before proceeding
         latestKycPromise.get();
 
-        // Transition to PendingReview
+        // Transition to PendingReview and notify reviewer
         formStatus = FormState.Status.PENDING_REVIEW;
         Workflow.upsertTypedSearchAttributes(REVIEW_STATUS.valueSet(formStatus.label()));
+        activities.notifyReviewer(applicationId);
 
-        // Auto-approve for now (skip human review)
-        reviewDecision = new ReviewDecision(ReviewDecision.Outcome.APPROVED, "Auto-approved");
+        // Wait for human review decision
+        Workflow.await(() -> reviewDecision != null || formStatus == FormState.Status.ABANDONED);
+        throwIfAbandoned();
 
         // Process decision
         if (reviewDecision.outcome() == ReviewDecision.Outcome.APPROVED) {
