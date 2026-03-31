@@ -10,8 +10,6 @@ export default defineEventHandler(async (event) => {
   if (statusFilter) {
     queryStr += ` AND ReviewStatus = '${statusFilter}'`
   }
-  queryStr += ' ORDER BY StartTime DESC'
-
   const applications: any[] = []
   const workflows = client.workflow.list({ query: queryStr })
   for await (const workflow of workflows) {
@@ -26,6 +24,8 @@ export default defineEventHandler(async (event) => {
       applicantName: searchAttrs?.ApplicantName?.[0] ?? 'Unknown',
     })
   }
+
+  applications.sort((a, b) => (b.startTime ?? '').localeCompare(a.startTime ?? ''))
 
   return applications
 })

@@ -5,7 +5,10 @@ const { data: applications, refresh } = useFetch('/api/applications', {
   query: computed(() => activeFilter.value ? { status: activeFilter.value } : {}),
 })
 
-const refreshInterval = setInterval(() => refresh(), 5000)
+let refreshInterval: ReturnType<typeof setInterval>
+onMounted(() => {
+  refreshInterval = setInterval(() => refresh(), 5000)
+})
 onUnmounted(() => clearInterval(refreshInterval))
 
 const allApps = computed(() => applications.value ?? [])
