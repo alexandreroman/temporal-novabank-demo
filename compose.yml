@@ -1,0 +1,43 @@
+services:
+  temporal:
+    image: temporalio/temporal
+    ports:
+      - "7233:7233"
+      - "8233:8233"
+    command: server start-dev --ip 0.0.0.0 --search-attribute "ReviewStatus=Keyword" --search-attribute "KycStatus=Keyword" --search-attribute "ApplicantName=Text"
+    healthcheck:
+      test: ["CMD-SHELL", "temporal operator cluster health"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  worker:
+    build: ./worker
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    restart: on-failure
+
+  backoffice:
+    build: ./backoffice
+    ports:
+      - "3001:3001"
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    restart: on-failure

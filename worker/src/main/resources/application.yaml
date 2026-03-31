@@ -6,7 +6,7 @@ spring:
 
   temporal:
     connection:
-      target: localhost:7233
+      target: ${TEMPORAL_ADDRESS:localhost:7233}
     workers-auto-discovery:
       packages:
         - io.temporal.demos.multistepform
