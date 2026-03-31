@@ -2,7 +2,7 @@
 const route = useRoute()
 const applicationId = route.params.id as string
 
-const { data: state, refresh, status: fetchStatus } = useLazyFetch(`/api/applications/${applicationId}/state`)
+const { data: state, refresh, status: fetchStatus } = useLazyFetch(`/api/reviews/${applicationId}/state`)
 const initialLoadDone = ref(false)
 watch(fetchStatus, (s) => { if (s === 'success') initialLoadDone.value = true }, { immediate: true })
 
@@ -39,7 +39,7 @@ async function submitDecision(outcome: 'Approved' | 'Rejected') {
   error.value = ''
   submitting.value = true
   try {
-    await $fetch(`/api/applications/${applicationId}/review`, {
+    await $fetch(`/api/reviews/${applicationId}/review`, {
       method: 'POST',
       body: { outcome, reason: reason.value },
     })

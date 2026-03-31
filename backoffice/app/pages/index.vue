@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const activeFilter = ref('')
 
-const { data: applications, refresh } = useFetch('/api/applications', {
+const { data: applications, refresh } = useFetch('/api/reviews', {
   query: computed(() => activeFilter.value ? { status: activeFilter.value } : {}),
 })
 
@@ -137,7 +137,7 @@ function formatDate(iso: string) {
             </td>
             <td>{{ formatDate(app.startTime) }}</td>
             <td>
-              <NuxtLink :to="`/applications/${app.applicationId}`" class="btn btn-secondary btn-sm">
+              <NuxtLink :to="`/reviews/${app.applicationId}`" class="btn btn-secondary btn-sm">
                 Review
               </NuxtLink>
             </td>
