@@ -1,0 +1,38 @@
+# IDE
+.idea/
+.fleet/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nuxt dev/build outputs
+.output/
+.data/
+.nuxt/
+.nitro/
+.cache/
+dist/
+
+# Node dependencies
+node_modules
+
+# Java / Maven
+worker/target/
+*.class
+*.jar
+
+# Logs
+logs/
+*.log
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+BRIEF.md
+settings.local.json
+backoffice
