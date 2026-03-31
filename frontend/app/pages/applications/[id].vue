@@ -37,7 +37,7 @@ const statusConfig = computed(() => {
     },
     Rejected: {
       title: 'Application Declined', icon: '&#10007;', class: 'status-rejected', label: 'Rejected',
-      message: `We're sorry, ${applicantName.value}. Your application could not be approved at this time.`,
+      message: `We're sorry, ${applicantName.value}.\nYour application could not be approved at this time.`,
     },
     Abandoned: {
       title: 'Application Expired', icon: '&#10007;', class: 'status-abandoned', label: 'Expired',
@@ -46,7 +46,7 @@ const statusConfig = computed(() => {
   }
   return configs[formStatus.value] ?? {
     title: 'Application Submitted', icon: '&#9202;', class: 'status-pending', label: 'Under Review',
-    message: `Thank you, ${applicantName.value}. Your application has been received and is now being reviewed by our compliance team.`,
+    message: `Thank you, ${applicantName.value}.\nYour application has been received and is now being reviewed by our compliance team.`,
   }
 })
 
