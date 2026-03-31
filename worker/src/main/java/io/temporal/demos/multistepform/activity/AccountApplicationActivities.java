@@ -9,7 +9,5 @@ public interface AccountApplicationActivities {
 
     void sendEmail(EmailRequest request);
 
-    void sendEscalationAlert(String applicationId);
-
     void notifyReviewer(String applicationId);
 }

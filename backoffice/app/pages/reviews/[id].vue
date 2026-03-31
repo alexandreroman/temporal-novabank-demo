@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { statusClass, statusLabel } = useStatusMapping()
 const route = useRoute()
 const applicationId = route.params.id as string
 
@@ -49,28 +50,6 @@ async function submitDecision(outcome: 'Approved' | 'Rejected') {
   } finally {
     submitting.value = false
   }
-}
-
-function statusClass(status: string) {
-  const map: Record<string, string> = {
-    PendingReview: 'pending-review',
-    InProgress: 'in-progress',
-    Approved: 'approved',
-    Rejected: 'rejected',
-    Abandoned: 'abandoned',
-  }
-  return map[status] || 'in-progress'
-}
-
-function statusLabel(status: string) {
-  const map: Record<string, string> = {
-    PendingReview: 'Pending Review',
-    InProgress: 'In Progress',
-    Approved: 'Approved',
-    Rejected: 'Rejected',
-    Abandoned: 'Abandoned',
-  }
-  return map[status] || status
 }
 
 function humanize(value: string) {

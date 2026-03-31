@@ -445,19 +445,6 @@ a {
   margin-bottom: 8px;
 }
 
-.reference-box {
-  display: inline-block;
-  margin: 20px 0;
-  padding: 12px 24px;
-  background: var(--paper);
-  border-radius: var(--radius);
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
 /* ── Loading ─────────────────────────────────────────────── */
 .page-loading {
   display: flex;

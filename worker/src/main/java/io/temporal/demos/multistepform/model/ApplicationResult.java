@@ -11,13 +11,6 @@ public record ApplicationResult(
         String lastName,
         String email
 ) {
-    public ApplicationResult(FormState.Status status, String firstName, String lastName, String email) {
-        this.status = status;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-
     public ApplicationResult(FormState.Status status) {
         this(status, null, null, null);
     }

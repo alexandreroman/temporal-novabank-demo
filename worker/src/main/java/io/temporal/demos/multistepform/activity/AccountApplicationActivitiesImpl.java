@@ -26,13 +26,6 @@ public class AccountApplicationActivitiesImpl implements AccountApplicationActiv
     }
 
     @Override
-    public void sendEscalationAlert(String applicationId) {
-        LOGGER.atInfo().addKeyValue("applicationId", applicationId).log("Sending escalation alert");
-        sleep(500);
-        LOGGER.atInfo().addKeyValue("applicationId", applicationId).log("Escalation alert sent");
-    }
-
-    @Override
     public void notifyReviewer(String applicationId) {
         LOGGER.atInfo().addKeyValue("applicationId", applicationId).log("Notifying reviewer");
         sleep(500);

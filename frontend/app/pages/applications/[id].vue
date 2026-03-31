@@ -11,9 +11,8 @@ const initialLoadDone = ref(false)
 watch(fetchStatus, (s) => { if (s === 'success') initialLoadDone.value = true }, { immediate: true })
 
 const currentPage = computed(() => (formState.value as any)?.currentPage ?? 1)
-const _kycRaw = computed(() => (formState.value as any)?.kyc)
 const kycStatus = ref<{ status: string; reason?: string } | undefined>()
-watch(_kycRaw, (v) => { if (v) kycStatus.value = v }, { immediate: true })
+watch(() => (formState.value as any)?.kyc, (v) => { if (v) kycStatus.value = v }, { immediate: true })
 const formStatus = computed(() => (formState.value as any)?.status)
 const isInProgress = computed(() => formStatus.value === 'InProgress')
 const reviewReason = computed(() => (formState.value as any)?.reviewDecision?.reason)
@@ -50,48 +49,22 @@ const statusConfig = computed(() => {
   }
 })
 
-// Poll while PendingReview to detect approval/rejection
-let statusPoll: ReturnType<typeof setInterval> | null = null
+function usePolling(condition: () => boolean, intervalMs: number) {
+  let timer: ReturnType<typeof setInterval> | null = null
+  watch(condition, (active) => {
+    if (active && !timer) {
+      timer = setInterval(() => refresh(), intervalMs)
+    } else if (!active && timer) {
+      clearInterval(timer)
+      timer = null
+    }
+  }, { immediate: true })
+  onUnmounted(() => { if (timer) clearInterval(timer) })
+}
 
-watch(formStatus, (s) => {
-  if (s === 'PendingReview' && !statusPoll) {
-    statusPoll = setInterval(() => refresh(), 2000)
-  } else if (s !== 'PendingReview' && statusPoll) {
-    clearInterval(statusPoll)
-    statusPoll = null
-  }
-}, { immediate: true })
-
-// Poll while InProgress to detect abandonment timeout
-let abandonPoll: ReturnType<typeof setInterval> | null = null
-
-watch(isInProgress, (active) => {
-  if (active && !abandonPoll) {
-    abandonPoll = setInterval(() => refresh(), 5000)
-  } else if (!active && abandonPoll) {
-    clearInterval(abandonPoll)
-    abandonPoll = null
-  }
-}, { immediate: true })
-
-// Poll while KYC is pending and badge is visible (pages 3-4)
-let kycPoll: ReturnType<typeof setInterval> | null = null
-const kycPending = computed(() => kycStatus.value?.status === 'Pending' && currentPage.value >= 2 && isInProgress.value)
-
-watch(kycPending, (need) => {
-  if (need && !kycPoll) {
-    kycPoll = setInterval(() => refresh(), 2000)
-  } else if (!need && kycPoll) {
-    clearInterval(kycPoll)
-    kycPoll = null
-  }
-}, { immediate: true })
-
-onUnmounted(() => {
-  if (statusPoll) clearInterval(statusPoll)
-  if (abandonPoll) clearInterval(abandonPoll)
-  if (kycPoll) clearInterval(kycPoll)
-})
+usePolling(() => formStatus.value === 'PendingReview', 2000)
+usePolling(() => isInProgress.value, 5000)
+usePolling(() => kycStatus.value?.status === 'Pending' && currentPage.value >= 2 && isInProgress.value, 2000)
 
 // ── Form data ──
 const page1 = reactive({
@@ -148,24 +121,28 @@ async function goToPage(page: number) {
   }
 }
 
+let submitPoll: ReturnType<typeof setInterval> | null = null
+
 async function submitFinal() {
   error.value = ''
   submitting.value = true
   try {
     await $fetch(`/api/applications/${applicationId}/submit`, { method: 'POST' })
-    const poll = setInterval(async () => {
+    submitPoll = setInterval(async () => {
       await refresh()
       if (!isInProgress.value) {
-        clearInterval(poll)
+        clearInterval(submitPoll!)
+        submitPoll = null
         submitting.value = false
       }
     }, 1000)
-    onUnmounted(() => clearInterval(poll))
   } catch (e: any) {
     error.value = e.data?.message || 'An error occurred. Please try again.'
     submitting.value = false
   }
 }
+
+onUnmounted(() => { if (submitPoll) clearInterval(submitPoll) })
 
 function humanize(value: string) {
   return value.replace(/([a-z])([A-Z])/g, '$1 $2')
@@ -584,32 +561,6 @@ function fillPage3() {
   color: var(--red);
 }
 
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  border-radius: 24px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin: 20px 0;
-}
-
-.status-badge.status-pending {
-  background: #fef9e7;
-  color: #b7950b;
-}
-
-.status-badge.status-approved {
-  background: #eafaf1;
-  color: var(--green);
-}
-
-.status-badge.status-rejected,
-.status-badge.status-abandoned {
-  background: #fdedec;
-  color: var(--red);
-}
 
 .review-reason {
   margin-top: 8px;

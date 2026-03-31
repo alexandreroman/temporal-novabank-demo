@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { statusClass, statusLabel } = useStatusMapping()
 const activeFilter = ref('')
 
 const { data: applications, refresh } = useFetch('/api/reviews', {
@@ -31,28 +32,6 @@ const filters = [
   { label: 'Rejected', value: 'Rejected' },
   { label: 'Abandoned', value: 'Abandoned' },
 ]
-
-function statusClass(status: string) {
-  const map: Record<string, string> = {
-    PendingReview: 'pending-review',
-    InProgress: 'in-progress',
-    Approved: 'approved',
-    Rejected: 'rejected',
-    Abandoned: 'abandoned',
-  }
-  return map[status] || 'in-progress'
-}
-
-function statusLabel(status: string) {
-  const map: Record<string, string> = {
-    PendingReview: 'Pending Review',
-    InProgress: 'In Progress',
-    Approved: 'Approved',
-    Rejected: 'Rejected',
-    Abandoned: 'Abandoned',
-  }
-  return map[status] || status
-}
 
 function kycClass(status: string) {
   const map: Record<string, string> = {

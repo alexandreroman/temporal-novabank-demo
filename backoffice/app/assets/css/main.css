@@ -448,18 +448,6 @@ a {
 }
 
 /* ── Summary Rows ────────────────────────────────────────── */
-.summary-section {
-  margin-bottom: 24px;
-}
-
-.summary-section h3 {
-  font-size: 1rem;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--gray-light);
-  color: var(--ink);
-}
-
 .summary-row {
   display: flex;
   justify-content: space-between;
