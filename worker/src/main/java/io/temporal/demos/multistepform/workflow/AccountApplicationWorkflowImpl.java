@@ -60,7 +60,7 @@ public class AccountApplicationWorkflowImpl implements AccountApplicationWorkflo
 
         // Abandonment timer: resets on every form activity
         Async.procedure(() -> {
-            while (formStatus == FormState.Status.IN_PROGRESS) {
+            while (formStatus == FormState.Status.IN_PROGRESS && !finalSubmitted) {
                 long deadline = lastActivityTime + ABANDONMENT_TIMEOUT.toMillis();
                 long remaining = deadline - Workflow.currentTimeMillis();
                 if (remaining > 0) {
@@ -68,7 +68,7 @@ public class AccountApplicationWorkflowImpl implements AccountApplicationWorkflo
                 }
                 // If no new activity happened during sleep, abandon
                 if (Workflow.currentTimeMillis() - lastActivityTime >= ABANDONMENT_TIMEOUT.toMillis()
-                        && formStatus == FormState.Status.IN_PROGRESS) {
+                        && formStatus == FormState.Status.IN_PROGRESS && !finalSubmitted) {
                     formStatus = FormState.Status.ABANDONED;
                     Workflow.upsertTypedSearchAttributes(REVIEW_STATUS.valueSet(formStatus.label()));
                     if (page1Data != null) {
