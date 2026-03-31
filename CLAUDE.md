@@ -8,6 +8,7 @@ Multi-step account opening form for **NovaBank** (fictional bank), powered by Te
 - ALWAYS use the `code-writer` agent for ANY code modification, no matter how small (including simple renames, find-and-replace, single-line edits, refactoring, and new code).
 - ALWAYS use the `temporal` CLI to debug workflows and retrieve Temporal-related details (workflow state, history, search attributes, etc.) instead of guessing or relying on memory.
 - NEVER use compound bash commands (`&&`, `;`). Use separate Bash tool calls instead.
+- Use `docker-compose` (hyphenated) instead of `docker compose` in all commands and documentation.
 
 ## Architecture
 
@@ -15,9 +16,9 @@ Monorepo — 3 independent components coordinated only through Temporal:
 
 | Component | Stack | URL |
 |---|---|---|
-| **frontend/** | Nuxt 4.4, Temporal TS SDK | `localhost:3000` |
-| **backoffice/** | Nuxt 4.4, Temporal TS SDK | `localhost:3001` |
-| **worker/** | Java 25, Spring Boot 4.0.5, Temporal Java SDK 1.33.0 | — |
+| **frontend/** | Vue.js, Temporal TS SDK | `localhost:3000` |
+| **backoffice/** | Vue.js, Temporal TS SDK | `localhost:3001` |
+| **worker/** | Java, Spring Boot, Temporal Java SDK | — |
 
 ## Workflow
 
@@ -25,7 +26,7 @@ Monorepo — 3 independent components coordinated only through Temporal:
 
 - **Signals** — `submitPage1–3()`, `submitFinalForm()`, `submitReviewDecision()`, `goToPage()`
 - **Query** — `getFormState()` → current page, status, form data, KYC info
-- **Async activity** — KYC verification runs in background during form filling
+- **Child workflow** — KYC verification runs in background during form filling
 - **Timer** — 3-min abandonment timeout (resettable on form activity)
 - **Human-in-the-loop** — compliance officer approves/rejects via backoffice
 
