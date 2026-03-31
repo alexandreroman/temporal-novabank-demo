@@ -1,9 +1,14 @@
 # Temporal NovaBank Demo
 
 Multi-step account opening form for **NovaBank** (fictional bank),
-powered by Temporal durable execution as the sole source of state
-(no database). A demo/reference application showcasing Temporal
-workflows with a human-in-the-loop pattern.
+powered by [Temporal](https://temporal.io)
+[durable execution](https://temporal.io/how-temporal-works) as the
+sole source of state (no database). A demo/reference application
+showcasing Temporal workflows with a human-in-the-loop pattern.
+
+Learn more:
+[Why Temporal?](https://docs.temporal.io/evaluate/why-temporal) |
+[How Temporal Works](https://temporal.io/how-temporal-works)
 
 ![Application screenshot](app.png)
 
