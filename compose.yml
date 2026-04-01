@@ -13,6 +13,8 @@ services:
 
   worker:
     build: ./worker
+    deploy:
+      replicas: 2
     depends_on:
       temporal:
         condition: service_healthy
