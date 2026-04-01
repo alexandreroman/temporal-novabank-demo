@@ -1,4 +1,4 @@
-# temporal-multistep-form-demo
+# Temporal NovaBank demo
 
 Multi-step account opening form for **NovaBank** (fictional bank), powered by Temporal durable execution as sole source of state (no database).
 

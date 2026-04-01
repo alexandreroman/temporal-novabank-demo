@@ -1,13 +1,13 @@
-package io.temporal.demos.multistepform.activity;
+package io.temporal.demos.novabank.worker.activity;
 
-import io.temporal.demos.multistepform.model.EmailRequest;
+import io.temporal.demos.novabank.worker.model.EmailRequest;
 import io.temporal.spring.boot.ActivityImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-@ActivityImpl(taskQueues = "multistep-form-demo")
+@ActivityImpl(taskQueues = "novabank")
 public class AccountApplicationActivitiesImpl implements AccountApplicationActivities {
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountApplicationActivitiesImpl.class);
 

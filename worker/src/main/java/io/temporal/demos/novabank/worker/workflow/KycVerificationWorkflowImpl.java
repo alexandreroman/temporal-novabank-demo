@@ -1,16 +1,16 @@
-package io.temporal.demos.multistepform.workflow;
+package io.temporal.demos.novabank.worker.workflow;
 
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
-import io.temporal.demos.multistepform.activity.KycActivities;
-import io.temporal.demos.multistepform.model.KycRequest;
-import io.temporal.demos.multistepform.model.KycResult;
+import io.temporal.demos.novabank.worker.activity.KycActivities;
+import io.temporal.demos.novabank.worker.model.KycRequest;
+import io.temporal.demos.novabank.worker.model.KycResult;
 import io.temporal.spring.boot.WorkflowImpl;
 import io.temporal.workflow.Workflow;
 
 import java.time.Duration;
 
-@WorkflowImpl(taskQueues = "multistep-form-demo")
+@WorkflowImpl(taskQueues = "novabank")
 public class KycVerificationWorkflowImpl implements KycVerificationWorkflow {
     private final KycActivities activities = Workflow.newActivityStub(
             KycActivities.class,

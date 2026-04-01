@@ -11,10 +11,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>io.temporal.demos.multistepform</groupId>
-    <artifactId>worker</artifactId>
+    <groupId>io.temporal.demos.novabank</groupId>
+    <artifactId>novabank-worker</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>Temporal Multi-step Form Demo :: Worker</name>
+    <name>Temporal NovaBank Demo :: Worker</name>
 
     <properties>
         <java.version>25</java.version>

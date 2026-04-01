@@ -1,7 +1,7 @@
-package io.temporal.demos.multistepform.activity;
+package io.temporal.demos.novabank.worker.activity;
 
 import io.temporal.activity.ActivityInterface;
-import io.temporal.demos.multistepform.model.EmailRequest;
+import io.temporal.demos.novabank.worker.model.EmailRequest;
 
 @ActivityInterface
 public interface AccountApplicationActivities {

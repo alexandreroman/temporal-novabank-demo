@@ -1,4 +1,4 @@
-package io.temporal.demos.multistepform.model;
+package io.temporal.demos.novabank.worker.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,18 +8,24 @@ import com.fasterxml.jackson.databind.annotation.EnumNaming;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record KycInfo(
+public record FormState(
+    int currentPage,
     Status status,
-    String workflowId,
-    String reason
+    PersonalInfoData page1,
+    AddressData page2,
+    FinancialData page3,
+    boolean finalSubmitted,
+    KycInfo kyc,
+    ReviewDecision reviewDecision
 ) {
 
     @EnumNaming(EnumNamingStrategies.UpperCamelCaseStrategy.class)
     public enum Status {
-        PENDING,
+        IN_PROGRESS,
+        PENDING_REVIEW,
         APPROVED,
-        REVIEW_NEEDED,
-        FAILED;
+        REJECTED,
+        ABANDONED;
 
         private static final EnumNamingStrategy NAMING =
                 EnumNamingStrategies.UPPER_CAMEL_CASE;
@@ -27,17 +33,5 @@ public record KycInfo(
         public String label() {
             return NAMING.convertEnumToExternalName(name());
         }
-    }
-
-    public static KycInfo pending(String workflowId) {
-        return new KycInfo(Status.PENDING, workflowId, null);
-    }
-
-    public static KycInfo approved(String workflowId) {
-        return new KycInfo(Status.APPROVED, workflowId, null);
-    }
-
-    public static KycInfo failed(String workflowId, String reason) {
-        return new KycInfo(Status.FAILED, workflowId, reason);
     }
 }

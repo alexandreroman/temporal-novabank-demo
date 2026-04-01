@@ -1,7 +1,7 @@
-package io.temporal.demos.multistepform.workflow;
+package io.temporal.demos.novabank.worker.workflow;
 
-import io.temporal.demos.multistepform.model.KycRequest;
-import io.temporal.demos.multistepform.model.KycResult;
+import io.temporal.demos.novabank.worker.model.KycRequest;
+import io.temporal.demos.novabank.worker.model.KycResult;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 

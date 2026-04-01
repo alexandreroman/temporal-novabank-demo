@@ -1,4 +1,4 @@
-package io.temporal.demos.multistepform.model;
+package io.temporal.demos.novabank.worker.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

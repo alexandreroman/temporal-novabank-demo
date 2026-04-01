@@ -1,10 +1,10 @@
-package io.temporal.demos.multistepform.workflow;
+package io.temporal.demos.novabank.worker.workflow;
 
 import io.temporal.activity.ActivityOptions;
 import io.temporal.common.RetryOptions;
 import io.temporal.common.SearchAttributeKey;
-import io.temporal.demos.multistepform.activity.AccountApplicationActivities;
-import io.temporal.demos.multistepform.model.*;
+import io.temporal.demos.novabank.worker.activity.AccountApplicationActivities;
+import io.temporal.demos.novabank.worker.model.*;
 import io.temporal.failure.ApplicationFailure;
 import io.temporal.spring.boot.WorkflowImpl;
 import io.temporal.workflow.Async;
@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 
-@WorkflowImpl(taskQueues = "multistep-form-demo")
+@WorkflowImpl(taskQueues = "novabank")
 public class AccountApplicationWorkflowImpl implements AccountApplicationWorkflow {
     private static final Duration ABANDONMENT_TIMEOUT = Duration.ofMinutes(3);
     private static final SearchAttributeKey<String> REVIEW_STATUS =

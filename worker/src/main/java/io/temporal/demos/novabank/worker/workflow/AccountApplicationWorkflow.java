@@ -1,6 +1,6 @@
-package io.temporal.demos.multistepform.workflow;
+package io.temporal.demos.novabank.worker.workflow;
 
-import io.temporal.demos.multistepform.model.*;
+import io.temporal.demos.novabank.worker.model.*;
 import io.temporal.workflow.QueryMethod;
 import io.temporal.workflow.SignalMethod;
 import io.temporal.workflow.WorkflowInterface;

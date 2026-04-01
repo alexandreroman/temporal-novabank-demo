@@ -15,5 +15,5 @@ export async function getTemporalClient(): Promise<Client> {
   return client
 }
 
-export const TASK_QUEUE = 'multistep-form-demo'
+export const TASK_QUEUE = 'novabank'
 export const WORKFLOW_TYPE = 'AccountApplicationWorkflow'
