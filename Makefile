@@ -8,7 +8,7 @@ SEARCH_ATTRS := --search-attribute "ReviewStatus=Keyword" \
 	--search-attribute "KycStatus=Keyword" \
 	--search-attribute "ApplicantName=Text"
 
-.PHONY: help temporal worker frontend backoffice dev \
+.PHONY: help temporal worker worker-native e2e frontend backoffice dev \
 	install install-frontend install-backoffice \
 	app-up app-down app-logs check clean
 
@@ -22,6 +22,12 @@ temporal: ## Start the Temporal dev server (CLI) with the required search attrib
 
 worker: ## Run the Java worker with hot-reload (Spring Boot devtools)
 	cd worker && ./mvnw spring-boot:run
+
+worker-native: ## Compile the worker into a GraalVM native binary (requires GraalVM as the active JDK)
+	cd worker && ./mvnw -Pnative native:compile -DskipTests
+
+e2e: ## Run the end-to-end test against an already-running stack (Temporal + worker must be up)
+	./e2e/account-application-e2e.sh
 
 frontend: install-frontend ## Run the frontend dev server with hot-reload (Nuxt)
 	cd frontend && npm run dev

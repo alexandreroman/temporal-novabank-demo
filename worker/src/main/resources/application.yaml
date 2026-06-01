@@ -7,9 +7,19 @@ spring:
   temporal:
     connection:
       target: ${TEMPORAL_ADDRESS:localhost:7233}
-    workers-auto-discovery:
-      packages:
-        - io.temporal.demos.novabank
+    # Workers are configured explicitly (workflow-classes / activity-beans) rather
+    # than via workers-auto-discovery: auto-discovery scans the classpath at runtime
+    # to find @WorkflowImpl classes, which a GraalVM native image cannot do (it would
+    # start only the activity poller and never register the workflows). An explicit
+    # list needs no runtime scanning and behaves identically on the JVM and natively.
+    workers:
+      - task-queue: novabank
+        workflow-classes:
+          - io.temporal.demos.novabank.worker.workflow.AccountApplicationWorkflowImpl
+          - io.temporal.demos.novabank.worker.workflow.KycVerificationWorkflowImpl
+        activity-beans:
+          - accountApplicationActivitiesImpl
+          - kycActivitiesImpl
 
 logging:
   structured:
