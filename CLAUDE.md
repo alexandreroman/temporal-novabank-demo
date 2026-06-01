@@ -2,13 +2,29 @@
 
 Multi-step account opening form for **NovaBank** (fictional bank), powered by Temporal durable execution as sole source of state (no database).
 
+See [README.md](README.md) for full documentation.
+
 ## Rules
 
 - All code, comments, and text must be in English only.
-- ALWAYS use the `code-writer` agent for ANY code modification, no matter how small (including simple renames, find-and-replace, single-line edits, refactoring, and new code).
 - ALWAYS use the `temporal` CLI to debug workflows and retrieve Temporal-related details (workflow state, history, search attributes, etc.) instead of guessing or relying on memory.
 - NEVER use compound bash commands (`&&`, `;`). Use separate Bash tool calls instead.
 - Use `docker compose` (with a space) instead of `docker-compose` (hyphenated) in all commands and documentation.
+
+## Agents
+
+Use the following agents (from the [skillbox](https://github.com/alexandreroman/skillbox) plugin) for all code tasks:
+
+- **code-writer** — for ANY task that writes, modifies, or refactors code, no matter how small (renames, find-and-replace, single-line edits, refactoring, new code). Never use the Edit or Write tools directly on source files — always delegate to this agent.
+- **code-reviewer** — for read-only code review before merging or when investigating issues.
+
+## Memory
+
+At the start of every conversation, read `.claude/project-memory/MEMORY.md` to load project context from previous conversations.
+
+Use the **project-memory** skill (from the [skillbox](https://github.com/alexandreroman/skillbox) plugin) proactively — without being asked — whenever the conversation reveals project decisions, deadlines, external references, workflow preferences, or corrective feedback worth persisting across conversations.
+
+**Important:** Persist project context only via the **project-memory** skill (`.claude/project-memory/`). Never use the built-in auto-memory (`~/.claude/projects/.../memory/`) — it is local and not shared with the team.
 
 ## Architecture
 
