@@ -140,13 +140,13 @@ temporal (dev server), worker, frontend, backoffice.
 Start:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 Stop:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 The same URLs apply (localhost:3000, localhost:3001,

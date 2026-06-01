@@ -8,7 +8,7 @@ Multi-step account opening form for **NovaBank** (fictional bank), powered by Te
 - ALWAYS use the `code-writer` agent for ANY code modification, no matter how small (including simple renames, find-and-replace, single-line edits, refactoring, and new code).
 - ALWAYS use the `temporal` CLI to debug workflows and retrieve Temporal-related details (workflow state, history, search attributes, etc.) instead of guessing or relying on memory.
 - NEVER use compound bash commands (`&&`, `;`). Use separate Bash tool calls instead.
-- Use `docker-compose` (hyphenated) instead of `docker compose` in all commands and documentation.
+- Use `docker compose` (with a space) instead of `docker-compose` (hyphenated) in all commands and documentation.
 
 ## Architecture
 
