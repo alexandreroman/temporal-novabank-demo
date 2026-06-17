@@ -10,15 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@temporalio/client": "^1.17.2",
-    "nuxt": "^4.4.6",
-    "vue": "^3.5.35",
+    "@temporalio/client": "^1.18.1",
+    "nuxt": "^4.4.8",
+    "vue": "^3.5.38",
     "vue-router": "^5.1.0"
   },
   "overrides": {
-    "protobufjs": "^7.6.1",
+    "protobufjs": "^7.6.4",
     "uuid": "^11.1.1",
     "ws": "^8.21.0",
-    "simple-git": "^3.36.0"
+    "simple-git": "^3.36.0",
+    "@grpc/grpc-js": "^1.14.4",
+    "esbuild": "^0.28.1",
+    "launch-editor": "^2.14.1",
+    "shell-quote": "^1.8.4",
+    "vite": "^7.3.5"
   }
 }
