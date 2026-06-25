@@ -67,7 +67,7 @@ install-backoffice: ## Install backoffice Node dependencies
 # --- Containerized app (Docker Compose) ---
 
 app-up: ## Build and start the full stack in containers (Docker Compose)
-	docker compose up --build -d
+	docker compose up -d
 	@echo ""
 	@echo "  Frontend:    http://localhost:3000"
 	@echo "  Backoffice:  http://localhost:3001"
