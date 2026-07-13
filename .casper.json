@@ -1,0 +1,10 @@
+{
+  "workspace": {
+    "scripts": {
+      "run": "make app-up",
+      "stop": "make app-down",
+      "dev": "make dev",
+      "teardown": "make app-down"
+    }
+  }
+}
