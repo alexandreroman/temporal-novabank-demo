@@ -1,9 +1,10 @@
 {
   "workspace": {
     "scripts": {
+      "setup": "make worktree-ports",
       "run": "make app-up",
-      "stop": "make app-down",
       "dev": "make dev",
+      "stop": "make app-down",
       "teardown": "make app-down"
     }
   }
