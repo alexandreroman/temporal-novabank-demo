@@ -10,10 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@temporalio/client": "^1.20.2",
+    "@temporalio/client": "^1.21.1",
     "nuxt": "^4.4.8",
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0"
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
   },
   "overrides": {
     "protobufjs": "^7.6.5",
