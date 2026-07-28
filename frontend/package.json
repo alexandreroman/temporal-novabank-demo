@@ -10,10 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@temporalio/client": "^1.20.2",
-    "nuxt": "^4.4.8",
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0"
+    "@temporalio/client": "^1.21.1",
+    "nuxt": "^4.5.1",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
   },
   "overrides": {
     "protobufjs": "^7.6.5",
@@ -24,6 +24,6 @@
     "esbuild": "^0.28.1",
     "launch-editor": "^2.14.1",
     "shell-quote": "^1.9.0",
-    "vite": "^7.3.6"
+    "vite": "^8.1.5"
   }
 }
