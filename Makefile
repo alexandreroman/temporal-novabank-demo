@@ -87,12 +87,12 @@ install-backoffice: ## Install backoffice Node dependencies
 
 # --- Containerized app (Docker Compose) ---
 
-app-up: ## Build and start the full stack in containers (Docker Compose)
-	docker compose up -d
+app-up: ## Build and start the full stack in containers (Docker Compose, foreground)
 	@echo ""
 	@echo "  Frontend:    http://localhost:$(FRONTEND_PORT)"
 	@echo "  Backoffice:  http://localhost:$(BACKOFFICE_PORT)"
 	@echo "  Temporal UI: http://localhost:$(TEMPORAL_UI_PORT)"
+	docker compose up
 
 app-down: ## Stop and remove the containerized stack
 	docker compose down
