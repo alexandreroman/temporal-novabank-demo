@@ -12,3 +12,5 @@
 - [Native build pitfalls](references/native-build-pitfalls.md) — changes that silently break the native image while the JVM build keeps working
 - [Temporal SDK + Nitro production bundling fix](references/temporal-sdk-nitro-prod-bundling.md) — prod node-server needs nitro.externals.inline for @temporalio/* + protobufjs; dev mode hides the crash
 - [Nuxt upgrades require a matching vite override](references/nuxt-vite-override-lockstep.md) — bump the vite override with nuxt in both apps; a stale pin breaks the build
+- [Casper info panel mirrors make endpoints](references/casper-info-panel-endpoints.md) — `make endpoints` owns the app URLs; up/down targets sync them into the panel
+- [make -n runs recipe lines containing $(MAKE)](references/makefile-dry-run-runs-recursive-make.md) — dry-running `dev` really launches the stack and hangs
